@@ -1,0 +1,22 @@
+#!/bin/bash
+set -eu
+
+if [ -z "${CONTAINER_ENGINE:+x}" ]; then
+  CONTAINER_ENGINE=docker
+fi
+
+if [ -z "${IMAGE_TAG:+x}" ]; then
+  IMAGE_TAG=ghcr.io/codewars/riscv64:latest
+fi
+
+W=/workspace
+
+# Create container
+C=$($CONTAINER_ENGINE container create --rm -w $W $IMAGE_TAG sh -c "gcc tests.c -lcgreen -o tests && ./tests")
+
+# Copy files from the current directory
+# example/tests.c
+$CONTAINER_ENGINE container cp examples/${1:-first_test}/. $C:$W
+
+# Run tests
+$CONTAINER_ENGINE container start --attach $C
