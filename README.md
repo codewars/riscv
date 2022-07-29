@@ -4,7 +4,7 @@ An experiment to try to add RISCV64 support to Codewars
 
 ## Prerequisites
 
-The container host must support [QEMU user-mode emulation](https://www.qemu.org/docs/master/user/main.html). Install the statically-compiled binaries for QEMU user-mode emulation **on the container host**, e.g. on Ubuntu 22.04:
+The container host must support [QEMU user-mode emulation](https://www.qemu.org/docs/master/user/main.html). Install the statically linked binaries for QEMU user-mode emulation **on the container host**, e.g. on Ubuntu 22.04:
 
 ```bash
 $ sudo apt update && sudo apt install qemu-user-static
@@ -22,15 +22,16 @@ Specify a container engine (default: `docker`) with environment variable `CONTAI
 $ CONTAINER_ENGINE=podman ./bin/run
 ```
 
-Specify an examples within the `examples/` directory to run (default: `first_test`) by passing a command-line argument. E.g. to run the example under `examples/first_test/`:
+Specify an example under the `examples/` directory to run (default: `multiply`) by passing a command-line argument. E.g. to run the example under `examples/multiply-failing/`:
 
 ```bash
-$ ./bin/run first_test
+$ ./bin/run multiply-failing
 ```
 
 ## Examples
 
-- `first_test` (default): "First test" example in [Installing Cgreen](https://cgreen-devs.github.io/cgreen/cgreen-guide-en.html#_installing_cgreen)
+- `multiply` (default): Example of `multiply` function with fixed and random tests
+- `multiply-failing`: Like `multiply`, but with a failing implementation
 
 ## Building
 

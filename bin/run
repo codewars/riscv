@@ -12,11 +12,16 @@ fi
 W=/workspace
 
 # Create container
-C=$($CONTAINER_ENGINE container create --rm -w $W $IMAGE_TAG sh -c "gcc tests.c -lcgreen -o tests && ./tests")
+C=$($CONTAINER_ENGINE container create --rm -w $W $IMAGE_TAG sh -c "gcc -O2 solution.s solution_tests.c -lcgreen tests.c -o tests && ./tests")
 
 # Copy files from the current directory
-# example/tests.c
-$CONTAINER_ENGINE container cp examples/${1:-first_test}/. $C:$W
+# example/solution.s
+# example/solution_tests.c
+$CONTAINER_ENGINE container cp examples/${1:-multiply}/. $C:$W
+
+# Copy files common to all setups
+# common/tests.c
+$CONTAINER_ENGINE container cp common/. $C:$W
 
 # Run tests
 $CONTAINER_ENGINE container start --attach $C
