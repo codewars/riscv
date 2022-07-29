@@ -27,9 +27,6 @@ jobs:
       - name: Run multiply example
         run: IMAGE_TAG=$IMAGE_NAME bin/run multiply
 
-      - name: Run multiply-failing example
-        run: IMAGE_TAG=$IMAGE_NAME bin/run multiply-failing
-
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
 
