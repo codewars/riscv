@@ -21,20 +21,17 @@ static char *create_codewars_escape_message(const char *message) {
     exit(EXIT_FAILURE);
   }
   char buf[2];
+  buf[1] = '\0';
   while (*message) {
-    if (*message == '\n')
+    if (*message == '\n') {
       strcat(escaped_message, CODEWARS_LF);
-    else {
-      sprintf(buf, "%c", *message);
+    } else {
+      buf[0] = *message;
       strcat(escaped_message, buf);
     }
     ++message;
   }
   return escaped_message;
-}
-
-static void destroy_codewars_escape_message(char *message) {
-  free(message);
 }
 
 static void codewars_reporter_start_suite(TestReporter *reporter, const char *name, int count) {
@@ -55,7 +52,7 @@ static void codewars_show_fail(TestReporter *reporter, const char *file, int lin
   printf("\n<FAILED::>");
   char *escaped_message = create_codewars_escape_message(message);
   vprintf(escaped_message, arguments);
-  destroy_codewars_escape_message(escaped_message);
+  free(escaped_message);
   printf("\n");
 }
 
