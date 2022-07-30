@@ -1,6 +1,37 @@
 #include <cgreen/reporter.h>
 #include <cgreen/breadcrumb.h>
 #include <stdio.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <string.h>
+
+const char *CODEWARS_LF = "<:LF:>";
+
+static char *create_codewars_escape_message(const char *message) {
+  size_t msglen = 0;
+  const size_t LF_LEN = strlen(CODEWARS_LF);
+  const char *tmp = message;
+  while (*tmp) {
+    msglen += *tmp == '\n' ? LF_LEN : 1;
+    ++tmp;
+  }
+  char *escaped_message = calloc(msglen + 1, sizeof(char));
+  char buf[2];
+  while (*message) {
+    if (*message == '\n')
+      strcat(escaped_message, CODEWARS_LF);
+    else {
+      sprintf(buf, "%c", *message);
+      strcat(escaped_message, buf);
+    }
+    ++message;
+  }
+  return escaped_message;
+}
+
+static void destroy_codewars_escape_message(char *message) {
+  free(message);
+}
 
 static void codewars_reporter_start_suite(TestReporter *reporter, const char *name, int count) {
   printf("\n<DESCRIBE::>%s\n", name);
@@ -18,7 +49,9 @@ static void codewars_show_pass(TestReporter *reporter, const char *file, int lin
 
 static void codewars_show_fail(TestReporter *reporter, const char *file, int line, const char *message, va_list arguments) {
   printf("\n<FAILED::>");
-  vprintf(message, arguments);
+  char *escaped_message = create_codewars_escape_message(message);
+  vprintf(escaped_message, arguments);
+  destroy_codewars_escape_message(escaped_message);
   printf("\n");
 }
 
