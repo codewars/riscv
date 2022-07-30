@@ -12,7 +12,7 @@ fi
 W=/workspace
 
 # Create container
-C=$($CONTAINER_ENGINE container create --rm -w $W $IMAGE_TAG sh -c "gcc -O2 solution.s solution_tests.c -lcgreen tests.c -o tests && ./tests")
+C=$($CONTAINER_ENGINE container create --rm -w $W $IMAGE_TAG sh -c "gcc -O2 solution.s solution_tests.c -lcgreen codewars_reporter.c tests.c -o tests && ./tests")
 
 # Copy files from the current directory
 # example/solution.s
