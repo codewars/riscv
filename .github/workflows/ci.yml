@@ -30,6 +30,12 @@ jobs:
       - name: Run multiply-failing example
         run: IMAGE_TAG=$IMAGE_NAME bin/run multiply-failing
 
+      - name: Run syntax-error example
+        run: IMAGE_TAG=$IMAGE_NAME bin/run syntax-error || true
+
+      - name: Run invalid-regname example
+        run: IMAGE_TAG=$IMAGE_NAME bin/run invalid-regname || true
+
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
 
