@@ -16,6 +16,10 @@ static char *create_codewars_escape_message(const char *message) {
     ++tmp;
   }
   char *escaped_message = calloc(msglen + 1, sizeof(char));
+  if (escaped_message == NULL) {
+    fprintf(stderr, "Call to calloc() failed: insufficient memory; exiting\n");
+    exit(EXIT_FAILURE);
+  }
   char buf[2];
   while (*message) {
     if (*message == '\n')
