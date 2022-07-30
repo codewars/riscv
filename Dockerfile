@@ -2,7 +2,7 @@ FROM docker.io/library/ubuntu:jammy
 
 RUN set -ex; \
     apt-get update; \
-    apt-get install -y --no-install-recommends gcc g++ binutils make cmake \
+    apt-get install -y --no-install-recommends gcc g++ make cmake \
       wget ca-certificates;
 
 WORKDIR /tmp
@@ -13,7 +13,9 @@ RUN set -ex; \
     rm -vf 1.6.0.tar.gz; \
     cd cgreen-1.6.0; \
     make; \
-    make install;
+    make install; \
+    cd; \
+    rm -rvf /tmp/cgreen-1.6.0;
 
 ENV LD_LIBRARY_PATH=/usr/local/lib
 
