@@ -1,6 +1,6 @@
 # codewars-riscv64
 
-An experiment to try to add RISCV64 support to Codewars
+Container image for RISCV64 assembly used by CodeRunner.
 
 ## Prerequisites
 
