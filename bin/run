@@ -19,10 +19,5 @@ C=$($CONTAINER_ENGINE container create --rm -w $W $IMAGE_TAG sh -c "gcc -O2 solu
 # example/solution_tests.c
 $CONTAINER_ENGINE container cp examples/${1:-multiply}/. $C:$W
 
-# Copy files common to all setups
-# common/codewars_reporter.c
-# common/tests.c
-$CONTAINER_ENGINE container cp common/. $C:$W
-
 # Run tests
 $CONTAINER_ENGINE container start --attach $C
