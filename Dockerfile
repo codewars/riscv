@@ -31,5 +31,10 @@ RUN set -ex; \
     useradd -m codewarrior; \
     mkdir /workspace; \
     chown -R codewarrior: /workspace;
-USER codewarrior
 WORKDIR /workspace
+
+# TODO Maintain reporter in a separate repo
+COPY workspace/codewars_reporter.c .
+COPY workspace/tests.c .
+
+USER codewarrior
