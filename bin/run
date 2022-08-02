@@ -6,7 +6,7 @@ if [ -z "${CONTAINER_ENGINE:+x}" ]; then
 fi
 
 if [ -z "${IMAGE_TAG:+x}" ]; then
-  IMAGE_TAG=ghcr.io/codewars/riscv64:latest
+  IMAGE_TAG=ghcr.io/codewars/riscv:latest
 fi
 
 W=/workspace
