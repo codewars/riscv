@@ -38,7 +38,7 @@ $ ./bin/run multiply-failing
 ## Building
 
 ```bash
-$ docker build --platform linux/riscv64 -t ghcr.io/codewars/riscv64:latest .
+$ docker build --platform linux/riscv64 -t ghcr.io/codewars/riscv:latest .
 ```
 
 ## License
