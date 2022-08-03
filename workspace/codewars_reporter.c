@@ -68,6 +68,10 @@ static void codewars_reporter_start_suite(TestReporter *reporter, const char *na
 static void codewars_reporter_start_test(TestReporter *reporter, const char *name) {
   printf("\n<IT::>%s\n", name);
   reporter_start_test(reporter, name);
+  reporter->passes = 0;
+  reporter->failures = 0;
+  reporter->skips = 0;
+  reporter->exceptions = 0;
   push_ts((struct ts_node **)&reporter->memo);
 }
 
@@ -85,7 +89,13 @@ static void codewars_show_fail(TestReporter *reporter, const char *file, int lin
 
 static void codewars_reporter_finish_test(TestReporter *reporter, const char *filename, int line, const char *message) {
   clock_t ts_diff = clock() - pop_ts((struct ts_node **)&reporter->memo);
+  // This function increments passes/failures counts.
   reporter_finish_test(reporter, filename, line, message);
+  // Increment the totals. `total_failures` is used to determine the exit code.
+  reporter->total_passes += reporter->passes;
+  reporter->total_failures += reporter->failures;
+  reporter->total_skips += reporter->skips;
+  reporter->total_exceptions += reporter->exceptions;
   printf("\n<COMPLETEDIN::>%ld\n", 1000 * ts_diff / CLOCKS_PER_SEC);
 }
 
