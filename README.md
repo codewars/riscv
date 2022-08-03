@@ -34,6 +34,7 @@ $ ./bin/run multiply-failing
 - `multiply-failing`: Like `multiply`, but with a failing implementation
 - `syntax-error`: An assembly program with syntax errors. Also demonstrates that it shouldn't be possible to cheat by replacing assembly with C
 - `invalid-regname`: An assembly program with an invalid register name `t7` (RISCV64 temporaries only range from `t0` to `t6`)
+- `with-preloaded`: An example of a Kata with preloaded section
 
 ## Building
 
