@@ -10,9 +10,6 @@ jobs:
   build_and_test:
     runs-on: ubuntu-latest
     if: ${{ github.repository == 'codewars/riscv' }}
-    permissions:
-      contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v3
 
@@ -40,7 +37,7 @@ jobs:
         run: bin/run multiply
 
       - name: Run multiply-failing example
-        run: bin/run multiply-failing
+        run: bin/run multiply-failing || true
 
       - name: Run syntax-error example
         run: bin/run syntax-error || true
