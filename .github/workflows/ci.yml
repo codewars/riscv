@@ -44,3 +44,6 @@ jobs:
 
       - name: Run invalid-regname example
         run: bin/run invalid-regname || true
+
+      - name: Run with-preloaded example
+        run: bin/run with-preloaded
