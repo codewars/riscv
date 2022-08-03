@@ -24,7 +24,8 @@ Ensure(Multiply, works_for_100_random_tests) {
     int a = rand() % 100;
     int b = rand() % 100;
     int expected = a * b;
-    assert_that(multiply(a, b), is_equal_to(expected));
+    // assert_that(multiply(a, b), is_equal_to(expected));
+    assert_equal_with_message(multiply(a, b), expected, "multiply(%d, %d) == %d", a, b, expected);
   }
 }
 
