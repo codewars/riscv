@@ -9,6 +9,9 @@ Describe(Multiply);
 BeforeEach(Multiply) {}
 AfterEach(Multiply) {}
 
+Ensure(Multiply, missing_assertion) {
+}
+
 Ensure(Multiply, works_for_some_fixed_tests) {
   assert_that(multiply(3, 5), is_equal_to(15));
   assert_that(multiply(5, 3), is_equal_to(15));
@@ -31,6 +34,7 @@ Ensure(Multiply, works_for_100_random_tests) {
 
 TestSuite *solution_tests() {
   TestSuite *suite = create_test_suite();
+  add_test_with_context(suite, Multiply, missing_assertion);
   add_test_with_context(suite, Multiply, works_for_some_fixed_tests);
   add_test_with_context(suite, Multiply, works_for_100_random_tests);
   return suite;

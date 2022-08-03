@@ -100,8 +100,12 @@ static void codewars_reporter_finish_test(TestReporter *reporter, const char *fi
   clock_t ts_diff = clock() - pop_ts((struct ts_node **)&reporter->memo);
   // This function increments passes/failures counts.
   reporter_finish_test(reporter, filename, line, message);
-  if (reporter->passes > 0 && reporter->failures == 0 && reporter->exceptions == 0 && reporter->skips == 0) {
-    printf("\n<PASSED::>Test Passed\n");
+  if (reporter->failures == 0 && reporter->exceptions == 0 && reporter->skips == 0) {
+    if (reporter->passes > 0) {
+      printf("\n<PASSED::>Test Passed\n");
+    } else {
+      printf("\n<ERROR::>Missing Assertions\n");
+    }
   }
   // Increment the totals. `total_failures` is used to determine the exit code.
   reporter->total_passes += reporter->passes;
