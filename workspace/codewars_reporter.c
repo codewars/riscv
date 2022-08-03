@@ -75,11 +75,11 @@ static void codewars_reporter_start_test(TestReporter *reporter, const char *nam
   push_ts((struct ts_node **)&reporter->memo);
 }
 
-static void codewars_show_pass(TestReporter *reporter, const char *file, int line, const char *message, va_list arguments) {
+static void codewars_reporter_show_pass(TestReporter *reporter, const char *file, int line, const char *message, va_list arguments) {
   printf("\n<PASSED::>Test Passed\n");
 }
 
-static void codewars_show_fail(TestReporter *reporter, const char *file, int line, const char *message, va_list arguments) {
+static void codewars_reporter_show_fail(TestReporter *reporter, const char *file, int line, const char *message, va_list arguments) {
   printf("\n<FAILED::>");
   char *escaped_message = create_codewars_escape_message(message);
   vprintf(escaped_message, arguments);
@@ -109,8 +109,8 @@ TestReporter *create_codewars_reporter() {
   TestReporter *reporter = create_reporter();
   reporter->start_suite = &codewars_reporter_start_suite;
   reporter->start_test = &codewars_reporter_start_test;
-  reporter->show_pass = &codewars_show_pass;
-  reporter->show_fail = &codewars_show_fail;
+  reporter->show_pass = &codewars_reporter_show_pass;
+  reporter->show_fail = &codewars_reporter_show_fail;
   reporter->finish_test = &codewars_reporter_finish_test;
   reporter->finish_suite = &codewars_reporter_finish_suite;
   reporter->memo = NULL;
