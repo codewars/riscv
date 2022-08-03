@@ -83,6 +83,19 @@ static void codewars_reporter_show_fail(TestReporter *reporter, const char *file
   printf("\n");
 }
 
+// When a test fails to complete
+static void codewars_reporter_show_incomplete(TestReporter *reporter, const char *file, int line, const char *message, va_list arguments) {
+  printf("\n<ERROR::>");
+  if (message == NULL) {
+    printf("Test Terminated Unexpectedly");
+  } else {
+    char *escaped_message = create_codewars_escape_message(message);
+    vprintf(escaped_message, arguments);
+    free(escaped_message);
+  }
+  printf("\n");
+}
+
 static void codewars_reporter_finish_test(TestReporter *reporter, const char *filename, int line, const char *message) {
   clock_t ts_diff = clock() - pop_ts((struct ts_node **)&reporter->memo);
   // This function increments passes/failures counts.
@@ -109,6 +122,7 @@ TestReporter *create_codewars_reporter() {
   reporter->start_suite = &codewars_reporter_start_suite;
   reporter->start_test = &codewars_reporter_start_test;
   reporter->show_fail = &codewars_reporter_show_fail;
+  reporter->show_incomplete = &codewars_reporter_show_incomplete;
   reporter->finish_test = &codewars_reporter_finish_test;
   reporter->finish_suite = &codewars_reporter_finish_suite;
   reporter->memo = NULL;
