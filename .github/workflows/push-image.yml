@@ -17,10 +17,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-        with:
-          platforms: riscv64
+      - name: Install qemu-user-static
+        run: |
+          cd /tmp
+          wget -q -O qemu-user-static.deb http://ftp.us.debian.org/debian/pool/main/q/qemu/qemu-user-static_7.1+dfsg-2+b1_amd64.deb
+          sudo apt install ./qemu-user-static.deb
+          rm ./qemu-user-static.deb
+          qemu-riscv64-static --version
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
