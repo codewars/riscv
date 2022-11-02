@@ -50,3 +50,6 @@ jobs:
 
       - name: Run rvv-memcpy example
         run: bin/run rvv-memcpy
+
+      - name: Run rvk-sha256sig0 example
+        run: bin/run rvk-sha256sig0
