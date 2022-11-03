@@ -30,6 +30,4 @@ WORKDIR /workspace
 COPY workspace/codewars_reporter.c .
 COPY workspace/tests.c .
 
-ENV QEMU_CPU=rv64,v=on,vext_spec=v1.0,zbkx=on,zk=on,zks=on
-
 USER codewarrior
