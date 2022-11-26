@@ -14,7 +14,7 @@ W=/workspace
 QEMU_CPU=rv64,v=on,vext_spec=v1.0,zbkx=on,zk=on,zks=on
 ARCH=rv64gcv_zba_zbb_zbc_zbs_zbkx_zk_zks
 
-LIBS="-lcgreen"
+LIBS="-lcgreen -lm"
 FILES="solution.s solution_tests.c codewars_reporter.c tests.c"
 CFLAGS="-O2 -march=$ARCH"
 
