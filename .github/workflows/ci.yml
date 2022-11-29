@@ -16,7 +16,7 @@ jobs:
       - name: Install qemu-user-static
         run: |
           cd /tmp
-          wget -q -O qemu-user-static.deb http://ftp.us.debian.org/debian/pool/main/q/qemu/qemu-user-static_7.1+dfsg-2+b1_amd64.deb
+          wget -q -O qemu-user-static.deb http://ftp.us.debian.org/debian/pool/main/q/qemu/qemu-user-static_7.1+dfsg-2~bpo11+3_amd64.deb
           sudo apt install ./qemu-user-static.deb
           rm ./qemu-user-static.deb
           qemu-riscv64-static --version
