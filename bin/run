@@ -11,11 +11,15 @@ fi
 
 W=/workspace
 
-ARCH=rv64gcv_zba_zbb_zbc_zbs_zbkx_zk_zks
 QEMU_CPU=rv64,v=on,vext_spec=v1.0,zbkx=on,zk=on,zks=on
+ARCH=rv64gcv_zba_zbb_zbc_zbs_zbkx_zk_zks
+
+LIBS="-lcgreen -lm"
+FILES="solution.s solution_tests.c codewars_reporter.c tests.c"
+CFLAGS="-O2 -march=$ARCH"
 
 # Create container
-C=$($CONTAINER_ENGINE container create --rm --env QEMU_CPU=$QEMU_CPU -w $W $IMAGE_TAG sh -c "gcc -O2 solution.s -march=$ARCH solution_tests.c -lcgreen codewars_reporter.c tests.c -o tests && ./tests")
+C=$($CONTAINER_ENGINE container create --rm --env QEMU_CPU=$QEMU_CPU -w $W $IMAGE_TAG sh -c "gcc $CFLAGS $FILES $LIBS -o tests && ./tests")
 
 # Copy files from the current directory
 # example/solution.s
